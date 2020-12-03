@@ -3,14 +3,23 @@ import { Grid } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 import FormFieldLabel from "../FormFieldLabel/FormFieldLabel";
 import { DropzoneDialog } from "material-ui-dropzone";
-import AddNewElementButton from "@/components/Buttons/AddNewElementButton/AddNewElementButton";
-import styled from "styled-components";
 
-interface OwnProps {}
+import styled from "styled-components";
+import { useField } from "formik";
+import { AddNewElementButton } from "@/components";
+
+interface OwnProps {
+  name: string;
+}
 
 type Props = OwnProps;
 
-const PhotosFormField: FC<Props> = () => {
+const MAX_FILE_SIZE = 3000000; // 3 MB
+const MAX_FILES_AMOUNT = 15;
+
+const PhotosFormField: FC<Props> = ({ name }) => {
+  const [_, { value }, { setValue }] = useField<File[]>(name);
+
   const [open, setOpen] = useState(false);
   const { t } = useTranslation(["buttons", "uploadPhotos"]);
 
@@ -21,7 +30,9 @@ const PhotosFormField: FC<Props> = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={3}>
             <AddNewElementButton onClick={() => setOpen(true)}>
-              {t("uploadPhotos:addPhotos")}
+              {value.length
+                ? t("uploadPhotos:addOrRemovePhotos", { amount: value.length })
+                : t("uploadPhotos:addPhotos")}
             </AddNewElementButton>
 
             <DropzoneDialog
@@ -29,17 +40,19 @@ const PhotosFormField: FC<Props> = () => {
               cancelButtonText={t("buttons:cancel")}
               submitButtonText={t("buttons:save")}
               dropzoneText={t("uploadPhotos:clickOrDropPhoto")}
-              maxFileSize={3000000}
+              maxFileSize={MAX_FILE_SIZE}
               open={open}
               onClose={() => setOpen(false)}
               onSave={(files) => {
                 console.log("Files:", files);
+                setValue(files);
                 setOpen(false);
               }}
-              filesLimit={3}
+              filesLimit={MAX_FILES_AMOUNT}
               showPreviews
               showFileNamesInPreview={false}
               showAlerts={false}
+              clearOnUnmount={false}
             />
           </Grid>
         </Grid>

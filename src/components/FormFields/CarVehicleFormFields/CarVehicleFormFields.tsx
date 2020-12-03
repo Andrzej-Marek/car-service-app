@@ -1,4 +1,5 @@
-import { TextField } from "@/components";
+import { SelectField, TextField } from "@/components";
+import { mileageUnitsOptions } from "@/shared/selectOptions";
 import { Grid } from "@material-ui/core";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,10 +18,10 @@ const CarVehicleFormFields: FC<Props> = ({ keyValue }) => {
       <FormFieldLabel text={t("title")} />
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} lg={4}>
-          <TextField name={`${keyValue}.make`} label={t("make")} />
+          <TextField name={`${keyValue}.make`} label={t("make")} required />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>
-          <TextField name={`${keyValue}.model`} label={t("model")} />
+          <TextField name={`${keyValue}.model`} label={t("model")} required />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>
           <TextField
@@ -41,12 +42,27 @@ const CarVehicleFormFields: FC<Props> = ({ keyValue }) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <TextField
+              name={`${keyValue}.mileage.mileage`}
+              label={t("mileage")}
+              space={{ right: 16 }}
+            />
+            <SelectField
+              name={`${keyValue}.mileage.unit`}
+              label={t("mileageUnit")}
+              options={mileageUnitsOptions}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4}>
           <TextField name={`${keyValue}.vinNumber`} label={t("vinNumber")} />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>
           <TextField
             name={`${keyValue}.registrationNumber`}
             label={t("registrationNumber")}
+            required
           />
         </Grid>
       </Grid>

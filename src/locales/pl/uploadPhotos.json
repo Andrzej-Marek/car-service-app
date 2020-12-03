@@ -1,5 +1,6 @@
 {
     "clickOrDropPhoto": "Kliknij lub upuść zdjęcie",
     "title": "Zdjęcia serwisowe",
-    "addPhotos": "Dodaj zdjęcia"
+    "addPhotos": "Dodaj zdjęcia",
+    "addOrRemovePhotos": "Dodaj lub usuń zdjęcia ({{amount}})"
 }

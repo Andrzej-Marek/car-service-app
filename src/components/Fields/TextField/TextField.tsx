@@ -9,12 +9,24 @@ import { useField } from "formik";
 interface OwnProps {
   name: string;
   label: string;
+  space?: {
+    left?: number;
+    right?: number;
+    top?: number;
+    bottom?: number;
+  };
   required?: boolean;
 }
 
 type Props = OwnProps & TextFieldProps;
 
-const TextField: FC<Props> = ({ name, label, required = false, ...rest }) => {
+const TextField: FC<Props> = ({
+  name,
+  label,
+  required = false,
+  space,
+  ...rest
+}) => {
   const [field, { error, touched }] = useField(name);
 
   const onBlurHandler = (
@@ -29,7 +41,7 @@ const TextField: FC<Props> = ({ name, label, required = false, ...rest }) => {
 
   const errorMessage = touched && error && error;
   return (
-    <FieldWrapper>
+    <FieldWrapper space={space}>
       <TextFieldMaterial
         variant="outlined"
         fullWidth

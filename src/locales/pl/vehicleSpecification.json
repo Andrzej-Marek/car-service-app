@@ -5,6 +5,7 @@
     "model": "Model",
     "productionYear": "Rok produkcji",
     "mileage": "Przebieg",
+    "mileageUnit": "Jednostka",
     "engineCapacity": "Pojemność",
     "enginePower": "Moc",
     "vinNumber": "Numer VIN",

@@ -20,6 +20,7 @@ const ServiceDetailsFormFields: FC<Props> = () => {
             label={t("serviceDescription")}
             multiline
             rows={4}
+            required
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>
@@ -28,6 +29,7 @@ const ServiceDetailsFormFields: FC<Props> = () => {
             label={t("serviceDiagnosis")}
             multiline
             rows={4}
+            required
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>

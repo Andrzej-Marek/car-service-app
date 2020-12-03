@@ -7,6 +7,7 @@ import priceVariants from "./priceVariants.json";
 import serviceCosts from "./serviceCosts.json";
 import uploadPhotos from "./uploadPhotos.json";
 import otherServiceInformations from "./otherServiceInformations.json";
+import paymentMethods from "./paymentMethods.json";
 
 export default {
   common,
@@ -18,4 +19,5 @@ export default {
   serviceCosts,
   uploadPhotos,
   otherServiceInformations,
+  paymentMethods,
 };

@@ -62,6 +62,7 @@ const SelectField: FC<Props> = ({
           required={required}
           {...field}
           onChange={onChangeHandler}
+          value={field.value === null ? "" : field.value}
         >
           {selectOptions}
         </Select>

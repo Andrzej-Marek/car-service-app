@@ -1,7 +1,36 @@
-import { Service } from "../service.type";
-import { ServiceCostElement } from "../serviceCostElement.type";
+import { Currency, PaymentMethod, PriceVariant } from "@/shared/enums";
 
-export type ServiceFormModel = Omit<
-  Service,
-  "updatedAt" | "publishedAt" | "createdAt" | "company" | "serviceId"
-> & { serviceCosts: { formFieldCost: ServiceCostElement } };
+interface CostElement {
+  taxRate: number | null;
+  priceNet: number | null;
+  priceGross: number | null;
+  quantity: number | null;
+  title: string;
+}
+export interface ServiceFormModel {
+  vehicleDetails: {
+    vinNumber: string;
+    engineCapacity: null;
+    enginePower: null;
+    make: string;
+    mileage: { mileage: string; unit: string };
+    model: string;
+    productionYear: string;
+    registrationNumber: string;
+  };
+  comments: string;
+  dateOfRegistration: string;
+  otherInformations: {
+    paymentMethod: PaymentMethod | null;
+    warrantyTime: string | null;
+  };
+  photos: File[];
+  serviceCosts: {
+    costsList: CostElement[];
+    formFieldCost: CostElement;
+    currency: Currency;
+    priceVariant: PriceVariant;
+  };
+  serviceDescription: string;
+  serviceDiagnosis: string;
+}

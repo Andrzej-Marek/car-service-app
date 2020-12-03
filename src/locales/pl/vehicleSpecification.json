@@ -1,0 +1,12 @@
+{
+    "type": "Rodzaj",
+    "title": "Dane pojazdu",
+    "make": "Marka",
+    "model": "Model",
+    "productionYear": "Rok produkcji",
+    "mileage": "Przebieg",
+    "engineCapacity": "Pojemność",
+    "enginePower": "Moc",
+    "vinNumber": "Numer VIN",
+    "registrationNumber": "Rejestracja"
+}

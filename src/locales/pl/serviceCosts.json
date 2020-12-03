@@ -1,0 +1,12 @@
+{
+    "title": "Koszty serwisowe",
+    "partDescription": "Opis przedmiotu",
+    "quantity": "Ilość",
+    "priceVariant": "Typ ceny",
+    "taxRate": "Stawka VAT",
+    "currency": "Waluta",
+    "priceNet": "Cena netto",
+    "priceGross": "Cena brutto",
+    "summary": "Razem",
+    "lp": "Lp."
+}

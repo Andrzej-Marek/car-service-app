@@ -1,12 +1,12 @@
-import { Button } from "@material-ui/core";
+import { Button, ButtonProps } from "@material-ui/core";
 import React, { FC } from "react";
 import styled from "styled-components";
 
 interface OwnProps {}
 
-type Props = OwnProps;
+type Props = OwnProps & ButtonProps;
 
-const AddNewElementButton: FC<Props> = ({ children, ...rest }) => {
+const PrimaryButton: FC<Props> = ({ children, ...rest }) => {
   return (
     <Wrapper>
       <Button {...rest} variant="contained">
@@ -18,10 +18,11 @@ const AddNewElementButton: FC<Props> = ({ children, ...rest }) => {
 
 const Wrapper = styled.div`
   .MuiButtonBase-root {
-    background: ${({ theme }) => theme.color.grey.light};
+    background: ${({ theme }) => theme.color.primary};
     width: 100%;
     height: 50px;
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 
-export default AddNewElementButton;
+export default PrimaryButton;

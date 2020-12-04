@@ -8,6 +8,8 @@ import serviceCosts from "./serviceCosts.json";
 import uploadPhotos from "./uploadPhotos.json";
 import otherServiceInformations from "./otherServiceInformations.json";
 import paymentMethods from "./paymentMethods.json";
+import auth from "./auth.json";
+import fields from "./fields.json";
 
 export default {
   common,
@@ -20,4 +22,6 @@ export default {
   uploadPhotos,
   otherServiceInformations,
   paymentMethods,
+  auth,
+  fields,
 };

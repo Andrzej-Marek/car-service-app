@@ -1,0 +1,8 @@
+{
+    "email": {
+        "label": "Adres e-mail"
+    },
+    "password": {
+        "label": "Hasło"
+    }
+}

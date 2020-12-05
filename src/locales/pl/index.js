@@ -10,6 +10,7 @@ import otherServiceInformations from "./otherServiceInformations.json";
 import paymentMethods from "./paymentMethods.json";
 import auth from "./auth.json";
 import fields from "./fields.json";
+import validation from "./validation.json";
 
 export default {
   common,
@@ -24,4 +25,5 @@ export default {
   paymentMethods,
   auth,
   fields,
+  validation,
 };

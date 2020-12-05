@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 
 interface OwnProps {}
@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   transition: 0.3s;
   font-size: ${({ theme }) => theme.fontSize.small};
   margin-top: 10px;
+
   :hover {
     cursor: pointer;
     text-decoration: underline;

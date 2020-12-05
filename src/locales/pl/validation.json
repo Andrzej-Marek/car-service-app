@@ -1,0 +1,17 @@
+{
+    "string": {
+        "toShort": "Minimalna długość to {{min}}",
+        "toLong": "Maksymalna długość to {{max}}",
+        "email": "Podaj poprawny adres e-mail",
+        "required": "Pole wymagane",
+        "length": "Wymagana długość to {{length}}"
+    },
+    "number": {
+        "toLow": "Minimalna wartość to {{min}}",
+        "toMuch": "Maksymalna wartosć to {{max}}",
+        "positive": "Wartość musi być dodatnia"
+    },
+    "mixed": {
+        "required": "Pole wymagane"
+    }
+}

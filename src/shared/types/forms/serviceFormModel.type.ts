@@ -1,4 +1,6 @@
-import { Currency, PaymentMethod, PriceVariant } from "@/shared/enums";
+import { OtherServiceInformations } from "../otherServiceInformations.type";
+import { ServiceCost } from "../serviceCost.type";
+import { VehicleDetails } from "../vehicleDetails.type";
 
 interface CostElement {
   taxRate: number | null;
@@ -8,29 +10,12 @@ interface CostElement {
   title: string;
 }
 export interface ServiceFormModel {
-  vehicleDetails: {
-    vinNumber: string;
-    engineCapacity: null;
-    enginePower: null;
-    make: string;
-    mileage: { mileage: string; unit: string };
-    model: string;
-    productionYear: string;
-    registrationNumber: string;
-  };
+  vehicleDetails: VehicleDetails;
   comments: string;
   dateOfRegistration: string;
-  otherInformations: {
-    paymentMethod: PaymentMethod | null;
-    warrantyTime: string | null;
-  };
+  otherInformations: OtherServiceInformations;
   photos: File[];
-  serviceCosts: {
-    costsList: CostElement[];
-    formFieldCost: CostElement;
-    currency: Currency;
-    priceVariant: PriceVariant;
-  };
+  serviceCosts: ServiceCost & { formFieldCost: CostElement };
   serviceDescription: string;
   serviceDiagnosis: string;
 }

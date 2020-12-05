@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Modal } from "./components";
-import { Login, NewServiceForm } from "./containers";
+import { Routes } from "./components";
 import { GlobalStyle } from "./shared/styles";
+import { ReactQueryDevtools } from "react-query-devtools";
 
 interface OwnProps {}
 
@@ -11,12 +11,10 @@ type Props = OwnProps;
 const App: FC<Props> = () => {
   return (
     <>
+      <ReactQueryDevtools initialIsOpen />
       <GlobalStyle />
-      <Modal isOpen>
-        <Login />
-      </Modal>
       <MainAppWrapper>
-        <NewServiceForm />
+        <Routes />
       </MainAppWrapper>
     </>
   );

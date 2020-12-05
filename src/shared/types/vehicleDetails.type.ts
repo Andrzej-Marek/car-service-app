@@ -2,7 +2,7 @@ export interface VehicleDetails {
   id?: number;
   make: string;
   model: string;
-  productionYear: string | null;
+  productionYear: number | null;
   mileage: {
     id?: number;
     mileage: number | null;
@@ -10,6 +10,6 @@ export interface VehicleDetails {
   } | null;
   engineCapacity: number | null;
   enginePower: number | null;
-  vinNumber: string | null;
+  vinNumber: string;
   registrationNumber: string | null;
 }

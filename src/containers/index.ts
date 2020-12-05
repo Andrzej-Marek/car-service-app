@@ -1,6 +1,6 @@
 export { default as CustomForm } from "./CustomForm/CustomForm";
 
-export { default as Login } from "./Login/Login";
+export { default as Auth } from "./Auth/Auth";
 
 // FORMS
 export { default as NewServiceForm } from "./Forms/NewServiceForm/NewServiceForm";

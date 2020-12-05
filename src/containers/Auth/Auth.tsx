@@ -8,7 +8,7 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const Login: FC<Props> = () => {
+const Auth: FC<Props> = () => {
   const { t } = useTranslation("auth");
 
   return (
@@ -34,4 +34,4 @@ const LoginLabel = styled.div`
   margin-bottom: 20px;
   font-weight: 700;
 `;
-export default Login;
+export default Auth;

@@ -1,9 +1,4 @@
-import {
-  Currency,
-  MileageUnit,
-  PaymentMethod,
-  PriceVariant,
-} from "@/shared/enums";
+import { Currency, MileageUnit, PriceVariant } from "@/shared/enums";
 import { ServiceFormModel } from "@/shared/types";
 
 export const newServiceFormInitialValues: ServiceFormModel = {
@@ -12,7 +7,7 @@ export const newServiceFormInitialValues: ServiceFormModel = {
     engineCapacity: null,
     enginePower: null,
     make: "",
-    mileage: { mileage: "", unit: MileageUnit.Km },
+    mileage: { mileage: null, unit: MileageUnit.Km },
     model: "",
     productionYear: "",
     registrationNumber: "",

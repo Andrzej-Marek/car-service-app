@@ -1,3 +1,4 @@
+export { default as Routes } from "./Routes/Routes";
 export { default as Modal } from "./Modal/Modal";
 
 // Fields

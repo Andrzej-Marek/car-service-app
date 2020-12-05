@@ -2,15 +2,17 @@ import { Button, ButtonProps } from "@material-ui/core";
 import React, { FC } from "react";
 import styled from "styled-components";
 
-interface OwnProps {}
+interface OwnProps {
+  isLoading?: boolean;
+}
 
 type Props = OwnProps & ButtonProps;
 
-const PrimaryButton: FC<Props> = ({ children, ...rest }) => {
+const PrimaryButton: FC<Props> = ({ isLoading = false, children, ...rest }) => {
   return (
     <Wrapper>
       <Button {...rest} variant="contained">
-        {children}
+        {isLoading && <span>Loading</span>} {children}
       </Button>
     </Wrapper>
   );

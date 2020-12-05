@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 interface OwnProps {
   isOpen: boolean;
+  onClose?: () => void;
   withBackground?: boolean;
   position?: "top" | "center";
 }
@@ -14,6 +15,7 @@ const modalRoot = document.getElementById("modal-root");
 
 const Modal: FC<Props> = ({
   isOpen,
+  onClose,
   withBackground = true,
   position = "top",
   children,
@@ -40,10 +42,7 @@ const Modal: FC<Props> = ({
     center: "50%",
   };
   return createPortal(
-    <ModalWrapper
-      onClick={() => console.log(123)}
-      withBackground={withBackground}
-    >
+    <ModalWrapper onClick={onClose} withBackground={withBackground}>
       <ModalContentWrapper topOffset={topOffsetConfig[position]}>
         {children}
       </ModalContentWrapper>

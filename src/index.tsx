@@ -4,12 +4,20 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./shared/constants";
 import "./i18n";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { QueryCache, ReactQueryCacheProvider } from "react-query";
+
+const queryCache = new QueryCache();
 
 ReactDOM.render(
-    <Suspense fallback={<div>Loading..</div>}>
+  <Suspense fallback={<div>Loading..</div>}>
+    <ReactQueryCacheProvider queryCache={queryCache}>
+      <BrowserRouter>
         <ThemeProvider theme={theme}>
-            <App />
+          <App />
         </ThemeProvider>
-    </Suspense>,
-    document.getElementById("root")
+      </BrowserRouter>
+    </ReactQueryCacheProvider>
+  </Suspense>,
+  document.getElementById("root")
 );

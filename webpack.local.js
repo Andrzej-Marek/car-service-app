@@ -6,7 +6,9 @@ module.exports = merge(common(), {
   mode: "development",
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {},
+      "process.env": {
+        BACKEND_URL: JSON.stringify("http://localhost:1337"),
+      },
     }),
   ],
 });

@@ -44,7 +44,6 @@ const PhotosFormField: FC<Props> = ({ name }) => {
               open={open}
               onClose={() => setOpen(false)}
               onSave={(files) => {
-                console.log("Files:", files);
                 setValue(files);
                 setOpen(false);
               }}

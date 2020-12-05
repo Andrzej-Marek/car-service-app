@@ -4,7 +4,7 @@ import { apiRequest } from "@/shared/helpers";
 
 export const createNewService = async (serviceDto: ServiceDto) => {
   try {
-    return await apiRequest({
+    return await apiRequest<ServiceDto>({
       endpoint: Endpoint.NewService,
       data: serviceDto,
       method: "post",

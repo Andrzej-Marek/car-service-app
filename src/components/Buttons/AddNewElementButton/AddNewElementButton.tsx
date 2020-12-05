@@ -1,10 +1,10 @@
-import { Button } from "@material-ui/core";
+import { Button, ButtonProps } from "@material-ui/core";
 import React, { FC } from "react";
 import styled from "styled-components";
 
 interface OwnProps {}
 
-type Props = OwnProps;
+type Props = OwnProps & ButtonProps;
 
 const AddNewElementButton: FC<Props> = ({ children, ...rest }) => {
   return (

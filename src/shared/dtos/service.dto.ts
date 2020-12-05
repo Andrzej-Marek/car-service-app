@@ -9,7 +9,7 @@ export interface ServiceDto {
   comments: string;
   dateOfRegistration: string;
   otherInformations: OtherServiceInformations;
-  photos: File[];
+  // photos: File[];
   serviceCosts: ServiceCost;
   serviceDescription: string;
   serviceDiagnosis: string;

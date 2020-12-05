@@ -5,11 +5,11 @@ import {
 } from "../types";
 
 export interface ServiceDto {
+  id?: string;
   vehicleDetails: VehicleDetails;
   comments: string;
   dateOfRegistration: string;
   otherInformations: OtherServiceInformations;
-  // photos: File[];
   serviceCosts: ServiceCost;
   serviceDescription: string;
   serviceDiagnosis: string;

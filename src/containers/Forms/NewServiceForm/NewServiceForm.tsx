@@ -28,17 +28,24 @@ const NewServiceForm: FC<Props> = () => {
 
   const onSubmitHandler = async (serviceFormModel: ServiceFormModel) => {
     const serviceDto = mapServiceFormModelToServiceDto(serviceFormModel);
-    const data = await createNewServiceAction(serviceDto);
+    try {
+      const createdServiceDto = await createNewServiceAction(serviceDto);
 
-    const photos = await uploadRelatedFilesAction({
-      files: serviceFormModel.photos,
-      relatedId: data?.data.id,
-    });
-    console.log("photos", photos);
+      if (!createdServiceDto || !createdServiceDto.data.id) {
+        return;
+      }
+
+      serviceFormModel.photos.map(async (fileEl) => {
+        await uploadRelatedFilesAction({
+          file: fileEl,
+          refId: createdServiceDto.data.id!,
+          ref: "service",
+          field: "photos",
+        });
+      });
+    } catch (error) {}
     reset();
     restUpload();
-
-    console.log("data", data);
   };
 
   console.log(isError ? error : "Brak errora");

@@ -22,5 +22,7 @@ export { TableColumn } from "./tableColumn.type";
 
 export { ServiceCostTable } from "./serviceCostTable.type";
 
+export { UploadRelatedFilesArgs } from "./uploadRelatedFilesArgs.type";
+
 // FORMS
 export { ServiceFormModel } from "./forms/serviceFormModel.type";

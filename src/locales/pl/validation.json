@@ -12,6 +12,7 @@
         "positive": "Wartość musi być dodatnia"
     },
     "mixed": {
-        "required": "Pole wymagane"
+        "required": "Pole wymagane",
+        "notType": "Niepoprawny format"
     }
 }

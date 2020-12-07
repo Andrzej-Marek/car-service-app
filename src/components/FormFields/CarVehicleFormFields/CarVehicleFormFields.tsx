@@ -18,10 +18,10 @@ const CarVehicleFormFields: FC<Props> = ({ keyValue }) => {
       <FormFieldLabel text={t("title")} />
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} lg={4}>
-          <TextField name={`${keyValue}.make`} label={t("make")} required />
+          <TextField name={`${keyValue}.make`} label={t("make")} />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>
-          <TextField name={`${keyValue}.model`} label={t("model")} required />
+          <TextField name={`${keyValue}.model`} label={t("model")} />
         </Grid>
         <Grid item xs={12} sm={6} lg={4}>
           <TextField
@@ -63,7 +63,6 @@ const CarVehicleFormFields: FC<Props> = ({ keyValue }) => {
           <TextField
             name={`${keyValue}.registrationNumber`}
             label={t("registrationNumber")}
-            required
           />
         </Grid>
       </Grid>

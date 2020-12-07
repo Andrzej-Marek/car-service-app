@@ -2,6 +2,7 @@ import {
   CarVehicleFormFields,
   OtherServiceInformationFormFields,
   PhotosFormField,
+  PrimaryButton,
   ServiceCostsFormFields,
   ServiceDetailsFormFields,
 } from "@/components";
@@ -9,10 +10,11 @@ import { CustomForm } from "@/containers";
 import { createNewService, uploadRelatedFiles } from "@/shared/actions";
 import { mapServiceFormModelToServiceDto } from "@/shared/mappers";
 import { ServiceFormModel } from "@/shared/types";
-import { Button } from "@material-ui/core";
 import React, { FC } from "react";
 import { useMutation } from "react-query";
+import styled from "styled-components";
 import { newServiceFormInitialValues } from "./newServiceForm.initialValues";
+import { newServiceFormSchema } from "./newServiceForm.schema";
 
 interface OwnProps {}
 
@@ -53,7 +55,7 @@ const NewServiceForm: FC<Props> = () => {
     <CustomForm<ServiceFormModel>
       initialValues={newServiceFormInitialValues}
       onSubmit={onSubmitHandler}
-      // validationSchema={newServiceFormSchema}
+      validationSchema={newServiceFormSchema}
     >
       {() => (
         <>
@@ -62,13 +64,19 @@ const NewServiceForm: FC<Props> = () => {
           <ServiceCostsFormFields keyValue="serviceCosts" />
           <PhotosFormField name="photos" />
           <OtherServiceInformationFormFields keyValue="otherInformations" />
-          <Button type="submit" variant="contained">
-            SUBMIT
-          </Button>
+          <SubmitButtonWrapper>
+            <PrimaryButton type="submit">Zapisz</PrimaryButton>
+          </SubmitButtonWrapper>
         </>
       )}
     </CustomForm>
   );
 };
 
+const SubmitButtonWrapper = styled.div`
+  max-width: 450px;
+  width: 100%;
+
+  margin-top: 20px;
+`;
 export default NewServiceForm;

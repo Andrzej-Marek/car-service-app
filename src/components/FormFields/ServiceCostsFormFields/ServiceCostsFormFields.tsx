@@ -9,7 +9,6 @@ import { Grid } from "@material-ui/core";
 import { useField } from "formik";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 import FormFieldLabel from "../FormFieldLabel/FormFieldLabel";
 import { ServiceCostsInputs } from "./components";
 import { serviceCostsTableColumns } from "./serviceCostsTable.columns";
@@ -41,6 +40,14 @@ const ServiceCostsFormFields: FC<Props> = ({ keyValue }) => {
     return costList;
   };
 
+  const deleteListElement = (elementIndex: number) => {
+    const costsListCopy = value.costsList;
+
+    costsListCopy.splice(elementIndex, 1);
+
+    setValue({ ...value, costsList: costsListCopy });
+  };
+
   const onAddNewServiceCostHandler = (
     serviceCostElement: ServiceCostElement
   ) => {
@@ -64,7 +71,7 @@ const ServiceCostsFormFields: FC<Props> = ({ keyValue }) => {
         <Grid item xs={12}>
           <Table<ServiceCostTable>
             data={createdCostList}
-            columns={serviceCostsTableColumns}
+            columns={serviceCostsTableColumns({ deleteListElement })}
           />
         </Grid>
       </Grid>

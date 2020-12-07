@@ -5,6 +5,7 @@ const translatePrefix = "validation";
 Yup.setLocale({
   mixed: {
     required: globalTranslation(`${translatePrefix}:mixed.required`),
+    notType: globalTranslation(`${translatePrefix}:mixed.notType`),
   },
   string: {
     min: ({ min }) =>

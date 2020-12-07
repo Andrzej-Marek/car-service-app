@@ -5,6 +5,8 @@ import { globalTranslation } from "@/shared/utils";
 import { CellProps } from "react-table";
 import { get } from "lodash";
 import { taxRateOptions } from "@/shared/selectOptions";
+import { DeleteOutlined } from "@material-ui/icons";
+import { ServiceCostsCellAction } from "./components";
 
 const TRANSLATION_PATH = "serviceCosts";
 
@@ -20,7 +22,16 @@ const getCellCurrency = (
   return get(info, "row.original.currency", undefined);
 };
 
-export const serviceCostsTableColumns: TableColumn<ServiceCostTable>[] = [
+interface TableColumnFnProps {
+  deleteListElement: (elementIndex: number) => void;
+}
+
+type TableColumnFn = (
+  props: TableColumnFnProps
+) => TableColumn<ServiceCostTable>[];
+export const serviceCostsTableColumns: TableColumnFn = ({
+  deleteListElement,
+}) => [
   {
     Header: globalTranslation(`${TRANSLATION_PATH}:lp`),
     styles: {
@@ -117,9 +128,22 @@ export const serviceCostsTableColumns: TableColumn<ServiceCostTable>[] = [
 
       return (
         <>
-          {total} {getFooterCurrency(info)}
+          {total.toFixed(2)} {getFooterCurrency(info)}
         </>
       );
     },
+  },
+  {
+    Header: globalTranslation(`${TRANSLATION_PATH}:actions`),
+    styles: {
+      minWidth: "100px",
+    },
+    Cell: ({ row }: React.PropsWithChildren<CellProps<any, any>>) => (
+      <>
+        <ServiceCostsCellAction
+          deleteListElement={() => deleteListElement(row.index)}
+        />
+      </>
+    ),
   },
 ];

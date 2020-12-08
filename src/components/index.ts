@@ -1,4 +1,3 @@
-export { default as Routes } from "./Routes/Routes";
 export { default as Modal } from "./Modal/Modal";
 
 // Fields
@@ -22,3 +21,8 @@ export { default as PrimaryButton } from "./Buttons/PrimaryButton/PrimaryButton"
 // TABLES
 export { default as Table } from "./Table/Table";
 export { default as TableFooterRowSummary } from "./TableFooterRowSummary/TableFooterRowSummary";
+
+// Routes
+export { default as Routes } from "./Routes/Routes";
+export { default as PrivateRoute } from "./Routes/PrivateRoute/PrivateRoute";
+export { default as PublicRoute } from "./Routes/PublicRoute/PublicRoute";

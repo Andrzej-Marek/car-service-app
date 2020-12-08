@@ -3,6 +3,7 @@ import { AppLogo } from "@/shared/assets/svg";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { LoginForm } from "..";
+import { Modal } from "@/components";
 
 interface OwnProps {}
 
@@ -12,13 +13,15 @@ const Auth: FC<Props> = () => {
   const { t } = useTranslation("auth");
 
   return (
-    <Wrapper>
-      <AppLogoWrapper>
-        <AppLogo />
-      </AppLogoWrapper>
-      <LoginLabel>{t("auth:login")}</LoginLabel>
-      <LoginForm />
-    </Wrapper>
+    <Modal isOpen>
+      <Wrapper>
+        <AppLogoWrapper>
+          <AppLogo />
+        </AppLogoWrapper>
+        <LoginLabel>{t("auth:login")}</LoginLabel>
+        <LoginForm />
+      </Wrapper>
+    </Modal>
   );
 };
 

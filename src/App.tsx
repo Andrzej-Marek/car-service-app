@@ -4,7 +4,7 @@ import { Routes } from "./components";
 import { GlobalStyle } from "./shared/styles";
 import { ReactQueryDevtools } from "react-query-devtools";
 import { ENV } from "./shared/constants";
-import { QueryStatus, useQuery } from "react-query";
+import { QueryStatus, useMutation } from "react-query";
 import { me } from "./shared/actions/query";
 import { AuthContext } from "./shared/context";
 import { get } from "lodash";
@@ -16,19 +16,34 @@ type Props = OwnProps;
 
 const App: FC<Props> = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [getMe, { status }] = useMutation(me);
 
-  const meQuery = useQuery("me", me, {
-    retry: false,
-    refetchOnReconnect: false,
-  });
+  // const meQuery = useQuery("me", me, {
+  //   retry: false,
+  //   refetchOnReconnect: false,
+  // });
 
   useEffect(() => {
-    if (meQuery.status === QueryStatus.Success || !user) {
-      setUser(get(meQuery, "data.data.user", null));
-    }
-  }, [meQuery]);
+    getCurrentLoginUser();
+  }, []);
 
-  if (meQuery.status === QueryStatus.Loading) {
+  const getCurrentLoginUser = async () => {
+    const user = await getMe();
+
+    if (!user) {
+      setUser(null);
+      return;
+    }
+
+    if (user && user.data) {
+      setUser(get(user, "data.user", null));
+      return;
+    }
+
+    setUser(null);
+  };
+
+  if (status === QueryStatus.Loading) {
     return <div>Loading...</div>;
   }
   return (

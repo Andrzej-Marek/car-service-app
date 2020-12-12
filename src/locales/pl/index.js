@@ -11,6 +11,7 @@ import paymentMethods from "./paymentMethods.json";
 import auth from "./auth.json";
 import fields from "./fields.json";
 import validation from "./validation.json";
+import notifications from "./notifications.json";
 
 export default {
   common,
@@ -26,4 +27,5 @@ export default {
   auth,
   fields,
   validation,
+  notifications,
 };

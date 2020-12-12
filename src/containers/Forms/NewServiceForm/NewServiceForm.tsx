@@ -1,16 +1,20 @@
 import {
   CarVehicleFormFields,
+  Modal,
   OtherServiceInformationFormFields,
   PhotosFormField,
   PrimaryButton,
   ServiceCostsFormFields,
   ServiceDetailsFormFields,
+  ServisLinkForClient,
 } from "@/components";
 import { CustomForm } from "@/containers";
 import { createNewService, uploadRelatedFiles } from "@/shared/actions";
 import { mapServiceFormModelToServiceDto } from "@/shared/mappers";
 import { ServiceFormModel } from "@/shared/types";
-import React, { FC } from "react";
+import { FormikHelpers } from "formik";
+import React, { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation } from "react-query";
 import styled from "styled-components";
 import { newServiceFormInitialValues } from "./newServiceForm.initialValues";
@@ -21,14 +25,17 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const NewServiceForm: FC<Props> = () => {
+  const { t } = useTranslation("common");
+  const [createdServiceId, setCreatedServiceId] = useState<null | string>(null);
   const [uploadRelatedFilesAction, { reset: restUpload }] = useMutation(
     uploadRelatedFiles
   );
-  const [createNewServiceAction, { error, isError, reset }] = useMutation(
-    createNewService
-  );
+  const [createNewServiceAction, { reset }] = useMutation(createNewService);
 
-  const onSubmitHandler = async (serviceFormModel: ServiceFormModel) => {
+  const onSubmitHandler = async (
+    serviceFormModel: ServiceFormModel,
+    { resetForm }: FormikHelpers<ServiceFormModel>
+  ) => {
     const serviceDto = mapServiceFormModelToServiceDto(serviceFormModel);
     try {
       const createdServiceDto = await createNewServiceAction(serviceDto);
@@ -45,31 +52,41 @@ const NewServiceForm: FC<Props> = () => {
           field: "photos",
         });
       });
+
+      setCreatedServiceId(createdServiceDto.data.serviceId!);
+      resetForm();
     } catch (error) {}
     reset();
     restUpload();
   };
 
-  console.log(isError ? error : "Brak errora");
   return (
-    <CustomForm<ServiceFormModel>
-      initialValues={newServiceFormInitialValues}
-      onSubmit={onSubmitHandler}
-      validationSchema={newServiceFormSchema}
-    >
-      {() => (
-        <>
-          <CarVehicleFormFields keyValue="vehicleDetails" />
-          <ServiceDetailsFormFields />
-          <ServiceCostsFormFields keyValue="serviceCosts" />
-          <PhotosFormField name="photos" />
-          <OtherServiceInformationFormFields keyValue="otherInformations" />
-          <SubmitButtonWrapper>
-            <PrimaryButton type="submit">Zapisz</PrimaryButton>
-          </SubmitButtonWrapper>
-        </>
-      )}
-    </CustomForm>
+    <>
+      <Modal
+        isOpen={!!createdServiceId}
+        onClose={() => setCreatedServiceId(null)}
+      >
+        <ServisLinkForClient createdServiceId={createdServiceId!} />
+      </Modal>
+      <CustomForm<ServiceFormModel>
+        initialValues={newServiceFormInitialValues}
+        onSubmit={onSubmitHandler}
+        validationSchema={newServiceFormSchema}
+      >
+        {() => (
+          <>
+            <CarVehicleFormFields keyValue="vehicleDetails" />
+            <ServiceDetailsFormFields />
+            <ServiceCostsFormFields keyValue="serviceCosts" />
+            <PhotosFormField name="photos" />
+            <OtherServiceInformationFormFields keyValue="otherInformations" />
+            <SubmitButtonWrapper>
+              <PrimaryButton type="submit">{t("save")}</PrimaryButton>
+            </SubmitButtonWrapper>
+          </>
+        )}
+      </CustomForm>
+    </>
   );
 };
 

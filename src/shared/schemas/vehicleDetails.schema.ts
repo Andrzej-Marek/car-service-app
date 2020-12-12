@@ -1,4 +1,3 @@
-import { VehicleDetails } from "../types";
 import { Yup } from "../utils";
 
 export const vehicleDetailsSchema = Yup.object().shape({
@@ -8,7 +7,7 @@ export const vehicleDetailsSchema = Yup.object().shape({
   registrationNumber: Yup.string().nullable(true),
   enginePower: Yup.number().positive().nullable(true),
   engineCapacity: Yup.number().positive().nullable(true),
-  productionYear: Yup.string().nullable(true),
+  productionYear: Yup.number().required(),
   // @ts-ignore
   mileage: Yup.object().shape({
     mileage: Yup.number().positive().nullable(true),

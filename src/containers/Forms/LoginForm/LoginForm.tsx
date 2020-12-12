@@ -16,15 +16,18 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
+const TEXT_FIELD_BOTTOM_SPACE = 20;
 const LoginForm: FC<Props> = () => {
   const { t } = useTranslation(["fields", "auth"]);
+  const { setUser } = useAuthContext();
   const history = useHistory();
   const [loginAction, { isLoading }] = useMutation(login);
 
   const onSubmitHandler = async (values: LoginDto) => {
     const userData = await loginAction(values);
-
+    console.log("userData", userData);
     if (userData) {
+      setUser(userData.data.user);
       history.push(RouteUrl.NewService);
     }
   };
@@ -40,12 +43,12 @@ const LoginForm: FC<Props> = () => {
           <TextField
             name="identifier"
             label={t("email.label")}
-            space={{ bottom: 20 }}
+            space={{ bottom: TEXT_FIELD_BOTTOM_SPACE }}
           />
           <TextField
             name="password"
             label={t("password.label")}
-            space={{ bottom: 20 }}
+            space={{ bottom: TEXT_FIELD_BOTTOM_SPACE }}
             type="password"
           />
           <PrimaryButton type="submit" isLoading={isLoading}>

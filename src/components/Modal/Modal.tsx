@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from "react";
+import { useOutsideClick } from "@/shared/hooks";
+import React, { FC, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 
@@ -21,6 +22,13 @@ const Modal: FC<Props> = ({
   children,
 }) => {
   const el = document.createElement("div");
+  const modalContentRef = useRef<HTMLDivElement>();
+
+  useOutsideClick(modalContentRef, () => {
+    if (onClose) {
+      onClose();
+    }
+  });
 
   useEffect(() => {
     if (!modalRoot) {
@@ -41,9 +49,14 @@ const Modal: FC<Props> = ({
     top: "100px",
     center: "50%",
   };
+
   return createPortal(
-    <ModalWrapper onClick={onClose} withBackground={withBackground}>
-      <ModalContentWrapper topOffset={topOffsetConfig[position]}>
+    <ModalWrapper withBackground={withBackground}>
+      <ModalContentWrapper
+        // @ts-ignore
+        ref={modalContentRef}
+        topOffset={topOffsetConfig[position]}
+      >
         {children}
       </ModalContentWrapper>
     </ModalWrapper>,
@@ -63,7 +76,7 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
   width: 100%;
   background: ${({ theme, withBackground }) =>
     withBackground && theme.color.modalBackground};
-  z-index: 999;
+  z-index: 900;
   overflow-y: hidden;
 `;
 
@@ -78,6 +91,7 @@ const ModalContentWrapper = styled.div<ModalContentWrapper>`
   margin: 0 auto;
   max-width: 550px;
   padding: 10px;
+  z-index: 999;
   top: ${({ topOffset }) => topOffset && topOffset};
   border-radius: ${({ theme }) => theme.radius.normal};
 }

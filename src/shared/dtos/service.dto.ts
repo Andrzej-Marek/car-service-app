@@ -6,6 +6,7 @@ import {
 
 export interface ServiceDto {
   id?: string;
+  serviceId?: string;
   vehicleDetails: VehicleDetails;
   comments: string;
   dateOfRegistration: string;

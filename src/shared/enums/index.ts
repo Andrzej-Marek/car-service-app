@@ -15,3 +15,5 @@ export { Query } from "./query.enum";
 export { Endpoint } from "./endpoint.enum";
 
 export { ApiVersion } from "./apiVersion.enum";
+
+export { Role } from "./role.enum";

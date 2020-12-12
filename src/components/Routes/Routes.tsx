@@ -1,6 +1,8 @@
+import React, { FC, useMemo } from "react";
 import { Auth, NewServiceForm } from "@/containers";
+import { useAuthContext } from "@/shared/context";
 import { RouteUrl } from "@/shared/enums";
-import React, { FC } from "react";
+import { checkIfUserIsAuthenticated } from "@/shared/helpers";
 import { Switch } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import PublicRoute from "./PublicRoute/PublicRoute";
@@ -10,7 +12,12 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const Routes: FC<Props> = () => {
-  const isAuthenticated = true;
+  const { user } = useAuthContext();
+
+  const isAuthenticated = useMemo(() => {
+    return checkIfUserIsAuthenticated(user);
+  }, [user]);
+
   return (
     <Switch>
       <PrivateRoute

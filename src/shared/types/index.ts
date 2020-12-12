@@ -24,5 +24,7 @@ export { ServiceCostTable } from "./serviceCostTable.type";
 
 export { UploadRelatedFilesArgs } from "./uploadRelatedFilesArgs.type";
 
+export { User } from "./user.type";
+
 // FORMS
 export { ServiceFormModel } from "./forms/serviceFormModel.type";

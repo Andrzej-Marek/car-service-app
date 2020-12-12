@@ -1,6 +1,6 @@
 export enum Endpoint {
   Login = "/auth/local",
-  Me = "/me",
+  Me = "/users/me",
   NewService = "/services",
   Upload = "/upload",
 }

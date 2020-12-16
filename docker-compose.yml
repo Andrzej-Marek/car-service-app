@@ -12,7 +12,7 @@ services:
       VIRTUAL_PORT: 6000
       LETSENCRYPT_HOST: serwis.raportserwisowy.pl
       LETSENCRYPT_EMAIL: andrzejmarek116@gmail.com
-# networks:
-#   default:
-#     external:
-#       name: nginx-proxy
+networks:
+  default:
+    external:
+      name: nginx-proxy

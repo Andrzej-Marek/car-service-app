@@ -1,5 +1,6 @@
 export { default as Modal } from "./Modal/Modal";
 export { default as ServisLinkForClient } from "./ServisLinkForClient/ServisLinkForClient";
+export { default as NavBar } from "./NavBar/NavBar";
 
 // Fields
 export { default as TextField } from "./Fields/TextField/TextField";

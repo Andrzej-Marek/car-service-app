@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from "react";
-import { Auth, NewServiceForm } from "@/containers";
+import { Auth, Layout, NewServiceForm } from "@/containers";
 import { useAuthContext } from "@/shared/context";
 import { RouteUrl } from "@/shared/enums";
 import { checkIfUserIsAuthenticated } from "@/shared/helpers";
@@ -19,18 +19,20 @@ const Routes: FC<Props> = () => {
   }, [user]);
 
   return (
-    <Switch>
-      <PrivateRoute
-        isAuthenticated={isAuthenticated}
-        component={NewServiceForm}
-        path={RouteUrl.NewService}
-      />
-      <PublicRoute
-        isAuthenticated={isAuthenticated}
-        component={Auth}
-        path={RouteUrl.Auth}
-      />
-    </Switch>
+    <Layout isAuthenticated={isAuthenticated}>
+      <Switch>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          component={NewServiceForm}
+          path={RouteUrl.NewService}
+        />
+        <PublicRoute
+          isAuthenticated={isAuthenticated}
+          component={Auth}
+          path={RouteUrl.Auth}
+        />
+      </Switch>
+    </Layout>
   );
 };
 

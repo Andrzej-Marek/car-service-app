@@ -3,4 +3,5 @@ export enum Endpoint {
   Me = "/users/me",
   NewService = "/services",
   Upload = "/upload",
+  Logout = "/logout",
 }

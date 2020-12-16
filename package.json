@@ -8,6 +8,7 @@
     "start": "webpack-dev-server --mode development --open --config webpack.local.js",
     "start:dev": "webpack-dev-server --mode development --open --config webpack.dev.js",
     "build": "webpack --progress --bail --config webpack.local.js",
+    "build:dev": "webpack --progress --bail --config webpack.dev.js",
     "check-types": "tsc",
     "pretty": "prettier --write src/**/*.tsx src/**/*.ts src/**/*.scss",
     "lint": "eslint --ext .jsx --ext .js --ext .ts --ext .tsx src",

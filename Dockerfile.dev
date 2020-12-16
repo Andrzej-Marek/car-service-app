@@ -1,0 +1,27 @@
+FROM node:10 as client
+
+WORKDIR /usr/app/client/
+COPY . ./
+RUN npm install
+RUN npm install react-scripts@3.0.1 -g
+
+RUN npm run build:dev
+
+
+# Setup the server
+
+FROM node:10
+
+WORKDIR /usr/app/
+COPY --from=client /usr/app/client/dist/ ./client/dist/
+
+WORKDIR /usr/app/server/
+COPY server/package*.json ./
+RUN npm i
+COPY server/ ./
+
+EXPOSE 6000
+
+CMD ["npm", "start"]
+
+

@@ -1,5 +1,6 @@
 import {
   CarVehicleFormFields,
+  LoadingSpinner,
   Modal,
   OtherServiceInformationFormFields,
   PhotosFormField,
@@ -68,6 +69,7 @@ const NewServiceForm: FC<Props> = () => {
       >
         <ServisLinkForClient createdServiceId={createdServiceId!} />
       </Modal>
+      <LoadingSpinner />
       <CustomForm<ServiceFormModel>
         initialValues={newServiceFormInitialValues}
         onSubmit={onSubmitHandler}

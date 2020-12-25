@@ -1,3 +1,4 @@
+import { LoadingSpinner } from "@/components";
 import { Button, ButtonProps } from "@material-ui/core";
 import React, { FC } from "react";
 import styled from "styled-components";
@@ -12,7 +13,7 @@ const PrimaryButton: FC<Props> = ({ isLoading = false, children, ...rest }) => {
   return (
     <Wrapper>
       <Button {...rest} variant="contained">
-        {isLoading && <span>Loading</span>} {children}
+        <span> {children} </span> {isLoading && <LoadingSpinner />}
       </Button>
     </Wrapper>
   );
@@ -24,6 +25,13 @@ const Wrapper = styled.div`
     width: 100%;
     height: 50px;
     color: ${({ theme }) => theme.color.white};
+
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-right: 10px;
+    }
   }
 `;
 

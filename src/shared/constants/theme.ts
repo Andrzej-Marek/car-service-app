@@ -13,7 +13,9 @@ export const theme = {
     white: "#fff",
     modalBackground: "rgba(0, 0, 0, 0.5)",
   },
-  iconSize: {},
+  iconSize: {
+    normal: "26px",
+  },
   radius: {
     normal: "4px",
   },

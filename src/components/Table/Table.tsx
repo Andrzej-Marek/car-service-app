@@ -2,10 +2,14 @@ import React, { PropsWithChildren } from "react";
 import { TableColumn } from "@/shared/types";
 import { useTable } from "react-table";
 import styled from "styled-components";
+import { LoadingSpinner } from "..";
+import { theme } from "@/shared/constants";
 
 interface OwnProps<T> {
   columns: TableColumn<T>[];
   data: T[];
+  isLoading?: boolean;
+  withFooter?: boolean;
 }
 
 type Props<T> = OwnProps<T>;
@@ -13,21 +17,31 @@ type Props<T> = OwnProps<T>;
 const Table = <T extends {}>({
   data,
   columns,
+  isLoading = false,
+  withFooter = false,
 }: PropsWithChildren<Props<T>>) => {
-  const { headerGroups, rows, prepareRow, footerGroups } = useTable<T>({
+  const dataToTable = isLoading ? [] : data;
+
+  const {
+    headerGroups,
+    rows,
+    prepareRow,
+    footerGroups,
+    getTableProps,
+  } = useTable<T>({
     columns,
-    data,
+    data: dataToTable,
   });
 
   return (
     <TableWrapper>
-      <table>
+      <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 //@ts-ignore
-                <StyledTh {...column.getHeaderProps()} style={column.styles}>
+                <StyledTh {...column.getHeaderProps()}>
                   {column.render("Header")}
                 </StyledTh>
               ))}
@@ -50,7 +64,7 @@ const Table = <T extends {}>({
             );
           })}
         </tbody>
-        {footerGroups && (
+        {footerGroups && withFooter && rows.length > 0 && (
           <tfoot>
             {footerGroups.map((group) => (
               <tr {...group.getFooterGroupProps()}>
@@ -64,12 +78,23 @@ const Table = <T extends {}>({
           </tfoot>
         )}
       </table>
+      {isLoading && (
+        <SpinnerWrapper>
+          <LoadingSpinner color={theme.color.primary} />
+        </SpinnerWrapper>
+      )}
     </TableWrapper>
   );
 };
 
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
 const TableWrapper = styled.div`
   padding: 1rem;
+  /* display: inline-flex; */
   display: block;
   max-width: 100%;
   overflow-x: auto;
@@ -96,7 +121,9 @@ const TableWrapper = styled.div`
 
 const StyledTh = styled.th`
   text-align: left;
-  padding: 10px 0.5rem;
+  padding: 15px 0.5rem;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
 `;
 
 interface StyledBodyTrProps {
@@ -114,7 +141,8 @@ const StyledTd = styled.td`
   padding: 10px 0.5rem;
 `;
 const StyledFooterTd = styled.td`
-  padding: 10px 0.5rem;
+  padding: 15px 0.5rem;
+  background: #fafafa;
   font-weight: 700;
 `;
 

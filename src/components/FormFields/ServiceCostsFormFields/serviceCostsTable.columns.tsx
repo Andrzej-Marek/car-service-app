@@ -5,7 +5,6 @@ import { globalTranslation } from "@/shared/utils";
 import { CellProps } from "react-table";
 import { get } from "lodash";
 import { taxRateOptions } from "@/shared/selectOptions";
-import { DeleteOutlined } from "@material-ui/icons";
 import { ServiceCostsCellAction } from "./components";
 
 const TRANSLATION_PATH = "serviceCosts";

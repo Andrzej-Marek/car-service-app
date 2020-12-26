@@ -72,6 +72,7 @@ const ServiceCostsFormFields: FC<Props> = ({ keyValue }) => {
           <Table<ServiceCostTable>
             data={createdCostList}
             columns={serviceCostsTableColumns({ deleteListElement })}
+            withFooter
           />
         </Grid>
       </Grid>

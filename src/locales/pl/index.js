@@ -12,6 +12,7 @@ import auth from "./auth.json";
 import fields from "./fields.json";
 import validation from "./validation.json";
 import notifications from "./notifications.json";
+import pages from "./pages.json";
 
 export default {
   common,
@@ -28,4 +29,5 @@ export default {
   fields,
   validation,
   notifications,
+  pages,
 };

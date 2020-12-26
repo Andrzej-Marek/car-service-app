@@ -1,9 +1,12 @@
 import { logout } from "@/shared/actions";
 import { AppLogo } from "@/shared/assets/svg";
 import { useAuthContext } from "@/shared/context";
+import { RouteUrl } from "@/shared/enums";
+import { media } from "@/shared/utils";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "react-query";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 interface OwnProps {}
@@ -11,7 +14,7 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const NavBar: FC<Props> = () => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(["auth", "pages"]);
   const { setUser } = useAuthContext();
   const [logoutHandler] = useMutation(logout);
 
@@ -29,6 +32,12 @@ const NavBar: FC<Props> = () => {
       <ContentWrapper>
         <AppLogo />
         <LinksWrapper>
+          <StyledLink>
+            <Link to={RouteUrl.NewService}>{t("pages:newService")}</Link>
+          </StyledLink>
+          <StyledLink>
+            <Link to={RouteUrl.ServiceList}>{t("pages:serviceList")}</Link>
+          </StyledLink>
           <StyledLink onClick={onClickLogout}>{t("auth:logout")}</StyledLink>
         </LinksWrapper>
       </ContentWrapper>
@@ -66,6 +75,15 @@ const StyledLink = styled.div`
   :hover {
     cursor: pointer;
   }
+
+  a {
+    color: ${({ theme }) => theme.color.white};
+    text-decoration: none;
+  }
+
+  ${media.tablet`
+    margin: 0 20px;  
+  `}
 `;
 
 export default NavBar;

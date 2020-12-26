@@ -4,10 +4,10 @@ import { GlobalStyle } from "./shared/styles";
 import { ReactQueryDevtools } from "react-query-devtools";
 import { ENV } from "./shared/constants";
 import { QueryStatus, useMutation } from "react-query";
-import { me } from "./shared/actions/query";
 import { AuthContext } from "./shared/context";
 import { get } from "lodash";
 import { User } from "./shared/types";
+import { me } from "./shared/actions";
 
 interface OwnProps {}
 

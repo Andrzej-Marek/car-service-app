@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { globalTranslation } from "./globalTranslation.type";
+import { globalTranslation } from "./globalTranslation.util";
 
 const translatePrefix = "validation";
 Yup.setLocale({

@@ -1,6 +1,6 @@
 export { media } from "./media";
 
-export { globalTranslation } from "./globalTranslation.type";
+export { globalTranslation } from "./globalTranslation.util";
 
 export { calculateServiceCost } from "./calculateServiceCost.utils";
 

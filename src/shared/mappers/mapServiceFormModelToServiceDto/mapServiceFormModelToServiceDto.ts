@@ -4,6 +4,8 @@ import { ServiceFormModel } from "@/shared/types";
 export const mapServiceFormModelToServiceDto = (
   serviceFormModel: ServiceFormModel
 ): ServiceDto => ({
+  serviceId: serviceFormModel.serviceId,
+  id: serviceFormModel.id,
   vehicleDetails: serviceFormModel.vehicleDetails,
   comments: serviceFormModel.comments,
   dateOfRegistration: serviceFormModel.dateOfRegistration,

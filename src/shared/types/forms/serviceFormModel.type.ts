@@ -3,14 +3,9 @@ import { ServiceCost } from "../serviceCost.type";
 import { ServiceCostElement } from "../serviceCostElement.type";
 import { VehicleDetails } from "../vehicleDetails.type";
 
-// interface CostElement {
-//   taxRate: number | null;
-//   priceNet: number | null;
-//   priceGross: number | null;
-//   quantity: number | null;
-//   title: string;
-// }
 export interface ServiceFormModel {
+  id?: number;
+  serviceId?: string;
   vehicleDetails: VehicleDetails;
   comments: string;
   dateOfRegistration: string;

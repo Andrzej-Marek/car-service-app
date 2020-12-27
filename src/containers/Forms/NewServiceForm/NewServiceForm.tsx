@@ -3,8 +3,10 @@ import { ServiceForm } from "@/containers";
 import {
   createNewService,
   getServiceById,
+  updateService,
   uploadRelatedFiles,
 } from "@/shared/actions";
+import { ServiceDto } from "@/shared/dtos";
 import {
   mapServiceFormModelToServiceDto,
   mapServiceToServiceFormModel,
@@ -34,6 +36,7 @@ const NewServiceForm: FC<Props> = () => {
   );
   const [getServiceByIdAction] = useMutation(getServiceById);
   const [createNewServiceAction, { reset }] = useMutation(createNewService);
+  const [updateServiceAction] = useMutation(updateService);
 
   // @ts-ignore
   useEffect(async () => {
@@ -62,28 +65,62 @@ const NewServiceForm: FC<Props> = () => {
     serviceFormModel: ServiceFormModel,
     { resetForm }: FormikHelpers<ServiceFormModel>
   ) => {
+    let serverServiceDto: ServiceDto;
     const serviceDto = mapServiceFormModelToServiceDto(serviceFormModel);
     try {
-      const createdServiceDto = await createNewServiceAction(serviceDto);
-
-      if (!createdServiceDto || !createdServiceDto.data.id) {
+      if (IS_EDITABLE_FORM) {
+        serverServiceDto = await updateServiceHandler(serviceDto);
+        setCreatedServiceId(serverServiceDto.serviceId!);
         return;
+      } else {
+        serverServiceDto = await createdServiceHandler(serviceDto);
       }
 
       serviceFormModel.photos.map(async (fileEl) => {
         await uploadRelatedFilesAction({
           file: fileEl,
-          refId: createdServiceDto.data.id!,
+          refId: serverServiceDto.id!.toString(),
           ref: "service",
           field: "photos",
         });
       });
 
-      setCreatedServiceId(createdServiceDto.data.serviceId!);
+      setCreatedServiceId(serverServiceDto.serviceId!);
+
       resetForm();
+      reset();
+      restUpload();
     } catch (error) {}
-    reset();
-    restUpload();
+  };
+
+  const updateServiceHandler = async (
+    serviceDto: ServiceDto
+  ): Promise<ServiceDto> => {
+    if (!serviceDto.id) {
+      throw new Error("Błąd z serwerem");
+    }
+
+    const updatedService = await updateServiceAction({
+      serviceDto,
+      serviceId: serviceDto.id,
+    });
+
+    if (!updatedService) {
+      throw new Error("Błąd z serwerem");
+    }
+    return updatedService;
+  };
+
+  const createdServiceHandler = async (
+    serviceDto: ServiceDto
+  ): Promise<ServiceDto> => {
+    const createdService = await createNewServiceAction(serviceDto);
+
+    if (!createdService) {
+      throw new Error("Błąd z serwerem");
+    }
+
+    return createdService;
   };
   return (
     <>

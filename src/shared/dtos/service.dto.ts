@@ -5,7 +5,7 @@ import {
 } from "../types";
 
 export interface ServiceDto {
-  id?: string;
+  id?: number;
   serviceId?: string;
   vehicleDetails: VehicleDetails;
   comments: string;

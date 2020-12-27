@@ -5,6 +5,8 @@ import { get } from "lodash";
 export const mapServiceToServiceFormModel = (
   service: Service
 ): ServiceFormModel => ({
+  id: service.id,
+  serviceId: service.serviceId,
   vehicleDetails: {
     id: service.vehicleDetails.id,
     vinNumber: service.vehicleDetails.vinNumber,

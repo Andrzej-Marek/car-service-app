@@ -6,7 +6,16 @@ export const mapServiceFormModelToServiceDto = (
 ): ServiceDto => ({
   serviceId: serviceFormModel.serviceId,
   id: serviceFormModel.id,
-  vehicleDetails: serviceFormModel.vehicleDetails,
+  vehicleDetails: {
+    engineCapacity: serviceFormModel.vehicleDetails.engineCapacity,
+    enginePower: serviceFormModel.vehicleDetails.enginePower,
+    make: serviceFormModel.vehicleDetails.make,
+    mileage: serviceFormModel.vehicleDetails.mileage,
+    model: serviceFormModel.vehicleDetails.model,
+    productionYear: serviceFormModel.vehicleDetails.productionYear,
+    registrationNumber: serviceFormModel.vehicleDetails.registrationNumber,
+    vinNumber: serviceFormModel.vehicleDetails.vinNumber,
+  },
   comments: serviceFormModel.comments,
   dateOfRegistration: serviceFormModel.dateOfRegistration,
   otherInformations: serviceFormModel.otherInformations,

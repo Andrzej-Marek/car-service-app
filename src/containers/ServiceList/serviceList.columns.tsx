@@ -4,9 +4,10 @@ import { Cell } from "react-table";
 import { TimeService } from "@/shared/services";
 import { TableActionCell } from "@/components";
 import EditIcon from "@material-ui/icons/Edit";
-import { theme } from "@/shared/constants";
+import { ENV, theme } from "@/shared/constants";
 import { globalTranslation } from "@/shared/utils";
 import { RouteUrl } from "@/shared/enums";
+import { renderServiceLink } from "@/shared/helpers";
 
 export const serviceListColumns: TableColumn<Service>[] = [
   {
@@ -38,10 +39,18 @@ export const serviceListColumns: TableColumn<Service>[] = [
     },
   },
   {
+    Header: globalTranslation("service:serviceId"),
+    accessor: (row) => row.serviceId,
+    styles: {
+      width: "50px",
+    },
+    Cell: (data: Cell<Service>) => renderServiceLink(data.value),
+  },
+  {
     Header: globalTranslation("common:createdAt"),
     accessor: (row) => row.createdAt,
     styles: {
-      width: "100px",
+      width: "140px",
     },
     Cell: (data: Cell<Service>) => <>{TimeService.toFullDate(data.value)}</>,
   },

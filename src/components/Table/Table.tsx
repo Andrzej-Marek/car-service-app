@@ -132,9 +132,6 @@ interface StyledBodyTrProps {
 const StyledBodyTr = styled.tr<StyledBodyTrProps>`
   background: ${({ theme, isEven }) =>
     isEven ? theme.color.white : theme.color.lightBlue};
-  td {
-    padding: 20px 0.5rem;
-  }
 `;
 
 const StyledTd = styled.td`

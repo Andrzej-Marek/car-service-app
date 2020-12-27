@@ -34,6 +34,11 @@ const Routes: FC<Props> = () => {
         />
         <PrivateRoute
           isAuthenticated={isAuthenticated}
+          component={NewServiceForm}
+          path={`${RouteUrl.EditService}/:serviceId`}
+        />
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
           component={ServiceList}
           path={RouteUrl.ServiceList}
         />

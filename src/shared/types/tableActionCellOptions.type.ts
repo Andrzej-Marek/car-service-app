@@ -4,7 +4,7 @@ import { RouteUrl } from "../enums";
 export interface TableActionCellOptions {
   icon: ReactNode;
   tooltipText?: string;
-  link?: RouteUrl;
+  link?: RouteUrl | string;
   onClick?: () => void;
   color?: string;
 }

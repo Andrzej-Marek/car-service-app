@@ -8,7 +8,6 @@ export const mapServiceFormModelToServiceDto = (
   comments: serviceFormModel.comments,
   dateOfRegistration: serviceFormModel.dateOfRegistration,
   otherInformations: serviceFormModel.otherInformations,
-  // photos: serviceFormModel.photos,
   serviceCosts: {
     costsList: serviceFormModel.serviceCosts.costsList,
     currency: serviceFormModel.serviceCosts.currency,

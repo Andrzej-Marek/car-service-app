@@ -22,6 +22,7 @@ const CustomForm = <T,>({
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
+      enableReinitialize
     >
       {(formProps) => (
         <form onSubmit={formProps.handleSubmit}>{children(formProps)}</form>

@@ -1,37 +1,62 @@
+import { LoadingSpinner, Modal, ServisLinkForClient } from "@/components";
+import { ServiceForm } from "@/containers";
 import {
-  CarVehicleFormFields,
-  LoadingSpinner,
-  Modal,
-  OtherServiceInformationFormFields,
-  PhotosFormField,
-  PrimaryButton,
-  ServiceCostsFormFields,
-  ServiceDetailsFormFields,
-  ServisLinkForClient,
-} from "@/components";
-import { CustomForm } from "@/containers";
-import { createNewService, uploadRelatedFiles } from "@/shared/actions";
-import { mapServiceFormModelToServiceDto } from "@/shared/mappers";
+  createNewService,
+  getServiceById,
+  uploadRelatedFiles,
+} from "@/shared/actions";
+import {
+  mapServiceFormModelToServiceDto,
+  mapServiceToServiceFormModel,
+} from "@/shared/mappers";
 import { ServiceFormModel } from "@/shared/types";
 import { FormikHelpers } from "formik";
-import React, { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { get } from "lodash";
+import React, { FC, useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import styled from "styled-components";
+import { useParams } from "react-router-dom";
 import { newServiceFormInitialValues } from "./newServiceForm.initialValues";
-import { newServiceFormSchema } from "./newServiceForm.schema";
 
 interface OwnProps {}
 
 type Props = OwnProps;
 
 const NewServiceForm: FC<Props> = () => {
-  const { t } = useTranslation("common");
+  const { serviceId } = useParams<{ serviceId: string | undefined }>();
+  const IS_EDITABLE_FORM = !!serviceId;
+
   const [createdServiceId, setCreatedServiceId] = useState<null | string>(null);
   const [uploadRelatedFilesAction, { reset: restUpload }] = useMutation(
     uploadRelatedFiles
   );
+  const [initialFormValues, setInitialFormValues] = useState(
+    newServiceFormInitialValues
+  );
+  const [getServiceByIdAction] = useMutation(getServiceById);
   const [createNewServiceAction, { reset }] = useMutation(createNewService);
+
+  // @ts-ignore
+  useEffect(async () => {
+    if (!IS_EDITABLE_FORM) {
+      setInitialFormValues(newServiceFormInitialValues);
+      return;
+    }
+    getInitialFormValues();
+  }, [IS_EDITABLE_FORM]);
+
+  const getInitialFormValues = async () => {
+    const data = await getServiceByIdAction(serviceId);
+    const serviceData = get(data, "data", null);
+
+    if (!serviceData) {
+      setInitialFormValues(newServiceFormInitialValues);
+      return;
+    }
+
+    const mappedValues = mapServiceToServiceFormModel(serviceData);
+
+    setInitialFormValues(mappedValues);
+  };
 
   const onSubmitHandler = async (
     serviceFormModel: ServiceFormModel,
@@ -60,7 +85,6 @@ const NewServiceForm: FC<Props> = () => {
     reset();
     restUpload();
   };
-
   return (
     <>
       <Modal
@@ -70,32 +94,12 @@ const NewServiceForm: FC<Props> = () => {
         <ServisLinkForClient createdServiceId={createdServiceId!} />
       </Modal>
       <LoadingSpinner />
-      <CustomForm<ServiceFormModel>
-        initialValues={newServiceFormInitialValues}
+      <ServiceForm
+        initialValues={initialFormValues}
         onSubmit={onSubmitHandler}
-        validationSchema={newServiceFormSchema}
-      >
-        {() => (
-          <>
-            <CarVehicleFormFields keyValue="vehicleDetails" />
-            <ServiceDetailsFormFields />
-            <ServiceCostsFormFields keyValue="serviceCosts" />
-            <PhotosFormField name="photos" />
-            <OtherServiceInformationFormFields keyValue="otherInformations" />
-            <SubmitButtonWrapper>
-              <PrimaryButton type="submit">{t("save")}</PrimaryButton>
-            </SubmitButtonWrapper>
-          </>
-        )}
-      </CustomForm>
+      />
     </>
   );
 };
 
-const SubmitButtonWrapper = styled.div`
-  max-width: 450px;
-  width: 100%;
-
-  margin-top: 20px;
-`;
 export default NewServiceForm;

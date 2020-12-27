@@ -1,4 +1,6 @@
 {
-    "hello": "Welcome!",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "edit": "Edytuj",
+    "createdAt": "Data utworzenia",
+    "actions": "Akcje"
 }

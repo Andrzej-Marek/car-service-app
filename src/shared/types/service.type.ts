@@ -5,8 +5,9 @@ import { ServiceCost } from "./serviceCost.type";
 import { VehicleDetails } from "./vehicleDetails.type";
 
 export interface Service {
+  id: number;
   serviceId: string;
-  photos: Picture[];
+  photos: Picture[] | File[];
   comments: string | null;
   otherInformations: OtherServiceInformations | null;
   serviceDescription: string;

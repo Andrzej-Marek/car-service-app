@@ -7,7 +7,7 @@ import { VehicleDetails } from "./vehicleDetails.type";
 export interface Service {
   id: number;
   serviceId: string;
-  photos: Picture[] | File[];
+  photos: Picture[];
   comments: string | null;
   otherInformations: OtherServiceInformations | null;
   serviceDescription: string;

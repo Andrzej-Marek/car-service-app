@@ -71,26 +71,33 @@ const NewServiceForm: FC<Props> = () => {
       if (IS_EDITABLE_FORM) {
         serverServiceDto = await updateServiceHandler(serviceDto);
         setCreatedServiceId(serverServiceDto.serviceId!);
+        const newPhotos = serviceFormModel.photos.filter(
+          (photo) => !get(photo, "url", false)
+        );
+        uploadPicturesHandler(newPhotos, serviceFormModel.id!);
         return;
       } else {
         serverServiceDto = await createdServiceHandler(serviceDto);
       }
 
-      serviceFormModel.photos.map(async (fileEl) => {
-        await uploadRelatedFilesAction({
-          file: fileEl,
-          refId: serverServiceDto.id!.toString(),
-          ref: "service",
-          field: "photos",
-        });
-      });
+      uploadPicturesHandler(serviceFormModel.photos, serviceFormModel.id!);
 
       setCreatedServiceId(serverServiceDto.serviceId!);
-
       resetForm();
       reset();
       restUpload();
     } catch (error) {}
+  };
+
+  const uploadPicturesHandler = (photos: File[], serviceId: number) => {
+    photos.map(async (fileEl) => {
+      await uploadRelatedFilesAction({
+        file: fileEl,
+        refId: serviceId.toString(),
+        ref: "service",
+        field: "photos",
+      });
+    });
   };
 
   const updateServiceHandler = async (

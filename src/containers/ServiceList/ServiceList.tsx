@@ -1,8 +1,7 @@
 import { Table } from "@/components";
 import { getServiceList } from "@/shared/actions";
 import { Service } from "@/shared/types";
-import { get } from "lodash";
-
+import { get, orderBy } from "lodash";
 import React, { FC, useMemo } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
@@ -20,11 +19,24 @@ const ServiceList: FC<Props> = () => {
   if (isError) {
     return <div>Problem z pobieraniem danych</div>;
   }
+
+  const sortedTableData = useMemo(() => {
+    const servicesList = get(data, "data", []);
+
+    return orderBy(
+      servicesList,
+      (service) => {
+        return new Date(service.createdAt);
+      },
+      ["desc"]
+    );
+  }, [data]);
+
   return (
     <Wrapper>
       <Table<Service>
         columns={serviceListColumnsMemo}
-        data={get(data, "data", [])}
+        data={sortedTableData}
         isLoading={isLoading}
       />
     </Wrapper>

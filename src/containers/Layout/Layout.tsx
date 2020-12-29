@@ -19,8 +19,13 @@ const Layout: FC<Props> = ({ isAuthenticated, children }) => {
 
 const Wrapper = styled.div`
   height: 100%;
-  min-height: 100vh;
+  position: relative;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   background: ${({ theme }) => theme.color.background};
+  min-height: 100vh;
 `;
 
 const PageWrapper = styled.div`

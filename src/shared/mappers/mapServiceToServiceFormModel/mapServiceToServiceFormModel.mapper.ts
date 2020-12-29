@@ -1,4 +1,3 @@
-import { Currency } from "@/shared/enums";
 import { Service, ServiceFormModel } from "@/shared/types";
 import { get } from "lodash";
 
@@ -26,7 +25,8 @@ export const mapServiceToServiceFormModel = (
     paymentMethod: get(service, "otherInformations.paymentMethod", null),
     warrantyTime: get(service, "otherInformations.warrantyTime", null),
   },
-  photos: service.photos as File[],
+  uploadedPhotos: service.photos,
+  photos: [],
   serviceCosts: {
     costsList: get(service, "serviceCosts.costsList", []),
     currency: get(service, "serviceCosts.currency", null),

@@ -5,7 +5,7 @@ COPY . ./
 RUN npm install
 RUN npm install react-scripts@3.0.1 -g
 
-RUN npm run build:dev
+RUN npm run build:prod
 
 
 # Setup the server

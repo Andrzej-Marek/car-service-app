@@ -25,7 +25,6 @@ const LoginForm: FC<Props> = () => {
   const onSubmitHandler = async (loginDto: LoginDto) => {
     try {
       const userData = await loginAction(loginDto);
-      console.log("userData", userData);
 
       if (userData) {
         setUser(userData.data.user);

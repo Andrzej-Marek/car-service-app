@@ -23,7 +23,6 @@ const PhotosFormField: FC<Props> = ({ name }) => {
   const [__, { value: uploadedPhotos }] = useField<Picture[]>("uploadedPhotos");
 
   const [open, setOpen] = useState(false);
-  console.log("uploadedPhotos", uploadedPhotos);
   return (
     <>
       <FormFieldLabel text={t("uploadPhotos:title")} />

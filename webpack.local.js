@@ -9,7 +9,7 @@ module.exports = merge(common(), {
       "process.env": {
         BACKEND_URL: JSON.stringify("http://localhost:1337"),
         ENV: JSON.stringify("DEVELOPMENT"),
-        CLIENT_URL: JSON.stringify("https://raportserwisowy.pl"),
+        CLIENT_URL: JSON.stringify("http://localhost:8080"),
       },
     }),
   ],

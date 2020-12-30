@@ -18,6 +18,7 @@ const App: FC<Props> = () => {
   const [getMe, { status }] = useMutation(me);
 
   useEffect(() => {
+    console.log("IT ME AFTER REBUILD!!!!");
     getCurrentLoginUser();
   }, []);
 

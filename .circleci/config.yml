@@ -5,7 +5,7 @@ executors:
       IMAGE_NAME: 12061997/car-service-app
     docker:
       - image: circleci/buildpack-deps:stretch
-      - image: node:12.0.0
+      # - image: node:12.0.0
 jobs:
   build:
     executor: docker-publisher
@@ -13,21 +13,21 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-{{ checksum "package.json" }}
+      #       # fallback to using the latest cache if no exact match is found
+      #       - v1-dependencies-
 
-      - run: yarn install
+      # - run: yarn install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run build
-      - run: yarn build:prod
+      # # run build
+      # - run: yarn build:prod
 
       - setup_remote_docker
 

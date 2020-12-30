@@ -18,7 +18,7 @@ const App: FC<Props> = () => {
   const [getMe, { status }] = useMutation(me);
 
   useEffect(() => {
-    console.log("NEW CONFIG");
+    console.log("NEW CONFIG!!!");
     getCurrentLoginUser();
   }, []);
 

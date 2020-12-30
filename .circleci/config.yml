@@ -1,16 +1,18 @@
-version: 2
+version: 2.1
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: 12061997/car-service-app
+    docker:
+      - image: circleci/buildpack-deps:stretch
+      - image: node:12.0.0
 jobs:
   build:
-    docker:
-      - image: node:12.0.0
-      - image: docker:17.05.0-ce-git
-
-    working_directory: ~/repo
+    executor: docker-publisher
 
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -27,20 +29,50 @@ jobs:
       # run build
       - run: yarn build:prod
 
-      # - setup_remote_docker:
-      #     docker_layer_caching: true
+      - setup_remote_docker
+
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       - run:
-          name: Install Docker client
+          name: Build Docker image
           command: |
-            set -x
-            VER="18.06.3-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+            docker build -t $IMAGE_NAME:latest -f Dockerfile.dev .
+      - run:
+          name: Archive Docker image
+          command: docker save -o image.tar $IMAGE_NAME
 
-      - run: docker build -t 12061997/car-service-app:latest -f Dockerfile.dev .
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
 
-      - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+  publish-latest:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - setup_remote_docker
+      - run:
+          name: Load archived Docker image
+          command: docker load -i /tmp/workspace/image.tar
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:latest
 
-      - run: docker push 12061997/car-service-app:latest
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - publish-latest:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

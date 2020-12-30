@@ -6,15 +6,13 @@ services:
       - 80
     restart: always
     environment:
+      WATCHTOWER_LABEL_ENABLE: 1
       VIRTUAL_HOST: serwis.raportserwisowy.pl
       VIRTUAL_PORT: 6000
       LETSENCRYPT_HOST: serwis.raportserwisowy.pl
       LETSENCRYPT_EMAIL: andrzejmarek116@gmail.com
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 60
+    labels:
+      - com.centurylinklabs.watchtower.enable: true
 networks:
   default:
     external:

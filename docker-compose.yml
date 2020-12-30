@@ -12,7 +12,7 @@ services:
       LETSENCRYPT_HOST: serwis.raportserwisowy.pl
       LETSENCRYPT_EMAIL: andrzejmarek116@gmail.com
     labels:
-      - com.centurylinklabs.watchtower.enable: true
+      - "com.centurylinklabs.watchtower.enable"
 networks:
   default:
     external:

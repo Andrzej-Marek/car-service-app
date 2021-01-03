@@ -41,10 +41,6 @@ export const serviceCostsTableColumns: TableColumnFn = ({
   {
     Header: globalTranslation(`${TRANSLATION_PATH}:title`),
     accessor: "title",
-    styles: {
-      minWidth: "200px",
-      width: "350px",
-    },
     maxWidth: 250,
     Footer: () => <>{globalTranslation(`${TRANSLATION_PATH}:summary`)}:</>,
   },
@@ -57,8 +53,9 @@ export const serviceCostsTableColumns: TableColumnFn = ({
     Header: globalTranslation(`${TRANSLATION_PATH}:priceNet`),
     accessor: "priceNet",
     styles: {
-      minWidth: "100px",
+      minWidth: "300px",
     },
+    minWidth: 300,
     Cell: (info) => (
       <>
         {info.value.toFixed(2)} {getCellCurrency(info)}

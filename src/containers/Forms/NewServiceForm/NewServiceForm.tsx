@@ -137,7 +137,6 @@ const NewServiceForm: FC<Props> = () => {
       >
         <ServisLinkForClient createdServiceId={createdServiceId!} />
       </Modal>
-      <LoadingSpinner />
       <ServiceForm
         initialValues={initialFormValues}
         onSubmit={onSubmitHandler}

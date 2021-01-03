@@ -52,7 +52,7 @@ const DatePickerField: FC<Props> = ({
         }}
         {...rest}
         {...field}
-        value={TimeService.toDatePickerFormat(field.value)}
+        value={field.value ? TimeService.toDatePickerFormat(field.value) : ""}
         onChange={handleDateChange}
       />
     </FieldWrapper>

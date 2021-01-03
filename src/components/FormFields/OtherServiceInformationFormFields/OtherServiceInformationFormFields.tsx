@@ -1,4 +1,4 @@
-import { DatePickerField, SelectField, TextField } from "@/components";
+import { DatePickerField, SelectField } from "@/components";
 import { paymentMethodOptions } from "@/shared/selectOptions";
 import { Grid } from "@material-ui/core";
 import React, { FC } from "react";
@@ -26,7 +26,7 @@ const OtherServiceInformationFormFields: FC<Props> = ({ keyValue }) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3} lg={2}>
-          <TextField
+          <DatePickerField
             name={`${keyValue}.warrantyTime`}
             label={t("warrantyTime")}
           />

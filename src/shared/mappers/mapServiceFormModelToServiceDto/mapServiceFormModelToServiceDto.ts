@@ -18,7 +18,11 @@ export const mapServiceFormModelToServiceDto = (
   },
   comments: serviceFormModel.comments,
   dateOfRegistration: serviceFormModel.dateOfRegistration,
-  otherInformations: serviceFormModel.otherInformations,
+  otherInformations: {
+    paymentMethod: serviceFormModel.otherInformations.paymentMethod,
+    serviceDate: serviceFormModel.otherInformations.serviceDate,
+    warrantyTime: serviceFormModel.otherInformations.warrantyTime,
+  },
   serviceCosts: {
     costsList: serviceFormModel.serviceCosts.costsList,
     currency: serviceFormModel.serviceCosts.currency,

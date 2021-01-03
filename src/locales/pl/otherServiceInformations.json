@@ -1,5 +1,6 @@
 {
     "title": "Pozostałe informacje",
     "paymentMethod": "Metoda płatności",
-    "warrantyTime": "Czas gwarancji"
+    "warrantyTime": "Czas gwarancji",
+    "serviceDate": "Data serwisu"
 }

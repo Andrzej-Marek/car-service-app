@@ -24,6 +24,8 @@ export const mapServiceToServiceFormModel = (
   otherInformations: {
     paymentMethod: get(service, "otherInformations.paymentMethod", null),
     warrantyTime: get(service, "otherInformations.warrantyTime", null),
+    serviceDate:
+      get(service, "otherInformations.serviceDate") || service.createdAt,
   },
   uploadedPhotos: service.photos,
   photos: [],

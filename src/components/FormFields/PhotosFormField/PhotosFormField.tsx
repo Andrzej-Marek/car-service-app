@@ -19,8 +19,8 @@ const MAX_FILES_AMOUNT = 15;
 
 const PhotosFormField: FC<Props> = ({ name }) => {
   const { t } = useTranslation(["buttons", "uploadPhotos"]);
-  const [_, { value }, { setValue }] = useField<File[]>(name);
-  const [__, { value: uploadedPhotos }] = useField<Picture[]>("uploadedPhotos");
+  const [, { value }, { setValue }] = useField<File[]>(name);
+  const [, { value: uploadedPhotos }] = useField<Picture[]>("uploadedPhotos");
 
   const [open, setOpen] = useState(false);
   return (
@@ -29,7 +29,7 @@ const PhotosFormField: FC<Props> = ({ name }) => {
       <UploadedPhotosWrapper>
         {uploadedPhotos &&
           uploadedPhotos.map((photo) => (
-            <img src={`${ENV.BACKEND_URL}${photo.url}`} />
+            <img src={`${ENV.BACKEND_URL}${photo.url}`} key={photo.url} />
           ))}
       </UploadedPhotosWrapper>
       <ContentWrapper>

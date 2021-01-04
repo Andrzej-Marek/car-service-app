@@ -1,4 +1,4 @@
-import { SelectField, TextField } from "@/components";
+import { DatePickerField, SelectField } from "@/components";
 import { paymentMethodOptions } from "@/shared/selectOptions";
 import { Grid } from "@material-ui/core";
 import React, { FC } from "react";
@@ -13,6 +13,7 @@ type Props = OwnProps;
 
 const OtherServiceInformationFormFields: FC<Props> = ({ keyValue }) => {
   const { t } = useTranslation(["otherServiceInformations", "buttons"]);
+
   return (
     <>
       <FormFieldLabel text={t("otherServiceInformations:title")} />
@@ -25,9 +26,15 @@ const OtherServiceInformationFormFields: FC<Props> = ({ keyValue }) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3} lg={2}>
-          <TextField
+          <DatePickerField
             name={`${keyValue}.warrantyTime`}
             label={t("warrantyTime")}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3} lg={2}>
+          <DatePickerField
+            name={`${keyValue}.serviceDate`}
+            label={t("serviceDate")}
           />
         </Grid>
       </Grid>

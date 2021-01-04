@@ -55,7 +55,6 @@ const NewServiceForm: FC<Props> = () => {
       setInitialFormValues(newServiceFormInitialValues);
       return;
     }
-
     const mappedValues = mapServiceToServiceFormModel(serviceData);
 
     setInitialFormValues(mappedValues);
@@ -67,6 +66,7 @@ const NewServiceForm: FC<Props> = () => {
   ) => {
     let serverServiceDto: ServiceDto;
     const serviceDto = mapServiceFormModelToServiceDto(serviceFormModel);
+
     try {
       if (IS_EDITABLE_FORM) {
         serverServiceDto = await updateServiceHandler(serviceDto);

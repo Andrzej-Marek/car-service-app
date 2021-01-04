@@ -26,6 +26,7 @@ type Props = OwnProps;
 
 const ServiceForm: FC<Props> = ({ initialValues, onSubmit }) => {
   const { t } = useTranslation("common");
+
   return (
     <CustomForm<ServiceFormModel>
       initialValues={initialValues}

@@ -1,7 +1,9 @@
 import React, { FC } from "react";
 import { FieldWrapper } from "../styles";
 import { useField } from "formik";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+import { TimeService } from "@/shared/services";
+import { TextField } from "@material-ui/core";
+import { get } from "lodash";
 
 interface OwnProps {
   name: string;
@@ -17,28 +19,40 @@ const DatePickerField: FC<Props> = ({
   required = false,
   ...rest
 }) => {
-  const [field, { error, touched }, { setValue }] = useField(name);
+  const [field, { error, touched }, { setValue }] = useField<Date | string>(
+    name
+  );
 
-  const handleDateChange = (date: Date | null) => {
-    setValue(date);
+  const handleDateChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const dateValue = get(event, "target.value");
+    if (!dateValue) {
+      return;
+    }
+
+    const isoDate = TimeService.toIsoDate(event.target.value);
+    setValue(isoDate);
   };
 
   const errorMessage = touched && error && error;
+
   return (
     <FieldWrapper>
-      <KeyboardDatePicker
-        disableToolbar
-        format="dd/MM/yyyy"
-        margin="normal"
-        label={label}
+      <TextField
+        variant="outlined"
+        fullWidth
         required={required}
+        label={label}
         error={!!errorMessage}
         helperText={errorMessage}
-        KeyboardButtonProps={{
-          "aria-label": "change date",
+        type="date"
+        InputLabelProps={{
+          shrink: true,
         }}
-        {...field}
         {...rest}
+        {...field}
+        value={field.value ? TimeService.toDatePickerFormat(field.value) : ""}
         onChange={handleDateChange}
       />
     </FieldWrapper>

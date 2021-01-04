@@ -7,10 +7,10 @@ export const mapServiceFormModelToServiceDto = (
   serviceId: serviceFormModel.serviceId,
   id: serviceFormModel.id,
   vehicleDetails: {
-    engineCapacity: serviceFormModel.vehicleDetails.engineCapacity,
-    enginePower: serviceFormModel.vehicleDetails.enginePower,
+    engineCapacity: serviceFormModel.vehicleDetails.engineCapacity || null,
+    enginePower: serviceFormModel.vehicleDetails.enginePower || null,
     make: serviceFormModel.vehicleDetails.make,
-    mileage: serviceFormModel.vehicleDetails.mileage,
+    mileage: serviceFormModel.vehicleDetails.mileage || null,
     model: serviceFormModel.vehicleDetails.model,
     productionYear: serviceFormModel.vehicleDetails.productionYear,
     registrationNumber: serviceFormModel.vehicleDetails.registrationNumber,

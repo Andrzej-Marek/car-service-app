@@ -13,6 +13,7 @@ export interface Service {
   serviceDescription: string;
   serviceDiagnosis: string;
   dateOfRegistration: string | null;
+  pdfLink: string;
   company: Company;
   serviceCosts: ServiceCost;
   vehicleDetails: VehicleDetails;

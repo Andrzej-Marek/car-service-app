@@ -5,6 +5,8 @@ export interface TableActionCellOptions {
   icon: ReactNode;
   tooltipText?: string;
   link?: RouteUrl | string;
+  show?: boolean;
+  absoluteLink?: string;
   onClick?: () => void;
   color?: string;
 }

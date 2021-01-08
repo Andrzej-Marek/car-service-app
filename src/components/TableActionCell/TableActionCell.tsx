@@ -18,6 +18,18 @@ const TableActionCell: FC<Props> = ({ options }) => {
       color: option.color,
     };
 
+    if (option.show === false) {
+      return <div />;
+    }
+
+    if (option.absoluteLink) {
+      return (
+        <a href={option.absoluteLink} onClick={option.onClick} target="_blank">
+          <IconWithTooltip {...commonProps} />
+        </a>
+      );
+    }
+
     if (option.link) {
       return (
         <Link to={option.link} onClick={option.onClick}>

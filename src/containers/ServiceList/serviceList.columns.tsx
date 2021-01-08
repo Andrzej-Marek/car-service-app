@@ -4,10 +4,12 @@ import { Cell } from "react-table";
 import { TimeService } from "@/shared/services";
 import { TableActionCell } from "@/components";
 import EditIcon from "@material-ui/icons/Edit";
+import DescriptionIcon from "@material-ui/icons/Description";
 import { ENV, theme } from "@/shared/constants";
 import { globalTranslation } from "@/shared/utils";
 import { RouteUrl } from "@/shared/enums";
 import { renderServiceLink } from "@/shared/helpers";
+import { get } from "lodash";
 
 export const serviceListColumns: TableColumn<Service>[] = [
   {
@@ -62,6 +64,13 @@ export const serviceListColumns: TableColumn<Service>[] = [
     Cell: (data: Cell<Service>) => (
       <TableActionCell
         options={[
+          {
+            color: theme.color.primary,
+            icon: <DescriptionIcon />,
+            tooltipText: globalTranslation("common:pdfRaport"),
+            absoluteLink: `${ENV.BACKEND_URL}${data.row.original.pdfLink}`,
+            show: get(data, "row.original.pdfLink") || false,
+          },
           {
             color: theme.color.primary,
             icon: <EditIcon />,

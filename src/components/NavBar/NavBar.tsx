@@ -81,7 +81,9 @@ const NavBar: FC<Props> = () => {
     <>
       <Nav>
         <NavLink to="/">
-          <AppLogo />
+          <AppLogoWrapper>
+            <AppLogo />
+          </AppLogoWrapper>
         </NavLink>
         <BarsWrapper onClick={onMenuBarClickHandler}>
           <MenuIcon />
@@ -95,6 +97,9 @@ const NavBar: FC<Props> = () => {
   );
 };
 
+const AppLogoWrapper = styled.div`
+  height: 55px;
+`;
 const Nav = styled.nav`
   background: ${({ theme }) => theme.color.primary};
   height: 60px;

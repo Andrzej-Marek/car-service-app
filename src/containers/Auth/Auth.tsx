@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { AppLogo } from "@/shared/assets/svg";
+import { AppLogoBlack } from "@/shared/assets/svg";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { LoginForm } from "..";
@@ -16,7 +16,7 @@ const Auth: FC<Props> = () => {
     <Modal isOpen>
       <Wrapper>
         <AppLogoWrapper>
-          <AppLogo />
+          <AppLogoBlack />
         </AppLogoWrapper>
         <LoginLabel>{t("auth:login")}</LoginLabel>
         <LoginForm />
@@ -29,7 +29,8 @@ const Wrapper = styled.div`
   padding: 10px 0;
 `;
 const AppLogoWrapper = styled.div`
-  padding-bottom: 10px;
+  height: 60px;
+  padding-bottom: 20px;
 `;
 
 const LoginLabel = styled.div`

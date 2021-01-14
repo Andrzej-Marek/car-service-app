@@ -13,9 +13,13 @@ export const uploadRelatedFiles = async (
     formData.append("refId", uploadRelatedFilesArgs.refId);
     formData.append("field", uploadRelatedFilesArgs.field);
 
-    await Axios.post(`${ENV.BACKEND_URL}${Endpoint.Upload}`, formData, {
-      withCredentials: true,
-    });
+    const response = await Axios.post(
+      `${ENV.BACKEND_URL}${Endpoint.Upload}`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
   } catch (error) {
     throw new Error(error);
   }

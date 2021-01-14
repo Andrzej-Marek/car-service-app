@@ -16,6 +16,7 @@ import { newServiceFormSchema } from "../NewServiceForm/newServiceForm.schema";
 
 interface OwnProps {
   initialValues: ServiceFormModel;
+  isPending: boolean;
   onSubmit: (
     serviceFormModel: ServiceFormModel,
     helpers: FormikHelpers<ServiceFormModel>
@@ -24,7 +25,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const ServiceForm: FC<Props> = ({ initialValues, onSubmit }) => {
+const ServiceForm: FC<Props> = ({ initialValues, onSubmit, isPending }) => {
   const { t } = useTranslation("common");
 
   return (
@@ -41,7 +42,9 @@ const ServiceForm: FC<Props> = ({ initialValues, onSubmit }) => {
           <PhotosFormField name="photos" />
           <OtherServiceInformationFormFields keyValue="otherInformations" />
           <SubmitButtonWrapper>
-            <PrimaryButton type="submit">{t("save")}</PrimaryButton>
+            <PrimaryButton type="submit" isLoading={isPending}>
+              {t("save")}
+            </PrimaryButton>
           </SubmitButtonWrapper>
         </>
       )}

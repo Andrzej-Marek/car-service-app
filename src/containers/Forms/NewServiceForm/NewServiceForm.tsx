@@ -34,6 +34,7 @@ const NewServiceForm: FC<Props> = () => {
   const [initialFormValues, setInitialFormValues] = useState(
     newServiceFormInitialValues
   );
+  const [isPending, toggleIsPending] = useState(false);
   const [getServiceByIdAction] = useMutation(getServiceById);
   const [createNewServiceAction, { reset }] = useMutation(createNewService);
   const [updateServiceAction] = useMutation(updateService);
@@ -64,6 +65,7 @@ const NewServiceForm: FC<Props> = () => {
     serviceFormModel: ServiceFormModel,
     { resetForm }: FormikHelpers<ServiceFormModel>
   ) => {
+    toggleIsPending(true);
     let serverServiceDto: ServiceDto;
     const serviceDto = mapServiceFormModelToServiceDto(serviceFormModel);
 
@@ -80,24 +82,30 @@ const NewServiceForm: FC<Props> = () => {
         serverServiceDto = await createdServiceHandler(serviceDto);
       }
 
-      uploadPicturesHandler(serviceFormModel.photos, serviceFormModel.id!);
+      await uploadPicturesHandler(
+        serviceFormModel.photos,
+        serverServiceDto.id!
+      );
 
       setCreatedServiceId(serverServiceDto.serviceId!);
       resetForm();
       reset();
       restUpload();
-    } catch (error) {}
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+    toggleIsPending(false);
   };
 
-  const uploadPicturesHandler = (photos: File[], serviceId: number) => {
-    photos.map(async (fileEl) => {
+  const uploadPicturesHandler = async (photos: File[], serviceId: number) => {
+    for (let i = 0; i < photos.length; i++) {
       await uploadRelatedFilesAction({
-        file: fileEl,
+        file: photos[i],
         refId: serviceId.toString(),
         ref: "service",
         field: "photos",
       });
-    });
+    }
   };
 
   const updateServiceHandler = async (
@@ -140,6 +148,7 @@ const NewServiceForm: FC<Props> = () => {
       <ServiceForm
         initialValues={initialFormValues}
         onSubmit={onSubmitHandler}
+        isPending={isPending}
       />
     </>
   );
